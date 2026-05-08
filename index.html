@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cut and Clear – Landscaping & Junk Removal | Titusville NJ</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #0f172a;
+      color: #f0f0f0;
+      line-height: 1.6;
+    }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+
+    .hero {
+      min-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    }
+    .hero h1 {
+      font-size: clamp(2.5rem, 8vw, 5rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero .subtitle {
+      font-size: clamp(1rem, 2.5vw, 1.4rem);
+      color: #94a3b8;
+      max-width: 550px;
+      margin: 1rem 0 2rem;
+    }
+    .hero .tagline {
+      font-size: 0.9rem;
+      color: #22c55e;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .hero .location { font-size: 1rem; color: #64748b; margin-bottom: 1rem; }
+
+    .cta-btn {
+      display: inline-block;
+      padding: 1rem 2.5rem;
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      color: #0f172a;
+      font-weight: 700;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .cta-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 30px rgba(34,197,94,0.3);
+    }
+
+    section { padding: 4rem 0; }
+    section h2 {
+      font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: #22c55e;
+    }
+    section .lead { color: #94a3b8; max-width: 600px; margin-bottom: 2rem; font-size: 1.05rem; }
+
+    .services {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+    .service-card {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 16px;
+      padding: 2rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .service-card:hover { border-color: #22c55e; transform: translateY(-4px); }
+    .service-card .icon { font-size: 2rem; margin-bottom: 0.75rem; }
+    .service-card h3 { color: #f0f0f0; font-size: 1.2rem; margin-bottom: 0.5rem; }
+    .service-card p { color: #94a3b8; font-size: 0.9rem; }
+
+    .why-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    .why-item {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-align: center;
+    }
+    .why-item .icon { font-size: 1.8rem; margin-bottom: 0.5rem; }
+    .why-item h4 { color: #22c55e; font-size: 1rem; margin-bottom: 0.3rem; }
+    .why-item p { color: #94a3b8; font-size: 0.85rem; }
+
+    .area-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+    }
+    .area-tag {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 50px;
+      padding: 0.5rem 1rem;
+      font-size: 0.85rem;
+      color: #94a3b8;
+    }
+
+    .cta-section {
+      text-align: center;
+      padding: 4rem 2rem;
+      border-top: 1px solid #334155;
+    }
+    .cta-section h2 { color: #22c55e; }
+    .cta-section p { color: #94a3b8; margin: 1rem auto 2rem; max-width: 500px; }
+    .contact-info { color: #94a3b8; font-size: 1.1rem; margin-top: 1.5rem; }
+    .contact-info a { color: #22c55e; text-decoration: none; }
+    .contact-info a:hover { text-decoration: underline; }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: #475569;
+      font-size: 0.85rem;
+      border-top: 1px solid #1e293b;
+    }
+  </style>
+</head>
+<body>
+  <section class="hero">
+    <p class="tagline">Cut the grass. Clear the junk. Done.</p>
+    <h1>Cut and Clear</h1>
+    <p class="location">📍 Titusville, NJ 08560 &amp; surrounding areas</p>
+    <p class="subtitle">Lawn care &bull; Landscaping &bull; Tree work &bull; Junk removal</p>
+    <a href="#contact" class="cta-btn">Get a Free Quote &rarr;</a>
+  </section>
+
+  <section><div class="container">
+    <h2>What We Do</h2>
+    <p class="lead">We cut the grass and clear the junk. Yard work, heavy lifting, cleanouts — one call handles it.</p>
+    <div class="services">
+      <div class="service-card">
+        <div class="icon">🌿</div>
+        <h3>Lawn Care &amp; Mowing</h3>
+        <p>Weekly or bi-weekly mowing, edging, trimming, and blowing. Neat, clean, professional.</p>
+      </div>
+      <div class="service-card">
+        <div class="icon">🍂</div>
+        <h3>Cleanups &amp; Mulch</h3>
+        <p>Spring/fall leaf removal, brush clearing, flowerbed prep, and mulch installation.</p>
+      </div>
+      <div class="service-card">
+        <div class="icon">🌳</div>
+        <h3>Tree Work</h3>
+        <p>Trimming, pruning, limb removal, and small tree takedowns. Clean up included.</p>
+      </div>
+      <div class="service-card">
+        <div class="icon">🗑️</div>
+        <h3>Junk Removal</h3>
+        <p>Furniture, appliances, yard waste, construction debris. Load it, haul it, dump it.</p>
+      </div>
+    </div>
+  </div></section>
+
+  <section style="background:#1e293b;"><div class="container">
+    <h2>Why Cut and Clear?</h2>
+    <p class="lead">Small operation, big effort. Your property gets treated like it's ours.</p>
+    <div class="why-list">
+      <div class="why-item">
+        <div class="icon">⏱️</div>
+        <h4>Fast Response</h4>
+        <p>Same-week scheduling. Text us, we show up.</p>
+      </div>
+      <div class="why-item">
+        <div class="icon">💰</div>
+        <h4>Fair Pricing</h4>
+        <p>No hidden fees. Hourly or flat-rate, you pick. Free estimates.</p>
+      </div>
+      <div class="why-item">
+        <div class="icon">🧹</div>
+        <h4>Clean Job Sites</h4>
+        <p>We don't leave a mess behind. Raked, blown, swept — ready.</p>
+      </div>
+      <div class="why-item">
+        <div class="icon">🏡</div>
+        <h4>Local Family Biz</h4>
+        <p>Titusville based. Serving Mercer, Bucks, and Hunterdon counties.</p>
+      </div>
+    </div>
+  </div></section>
+
+  <section><div class="container">
+    <h2>Service Area</h2>
+    <p class="lead">Titusville and everything within 20 minutes.</p>
+    <div class="area-grid">
+      <span class="area-tag">Titusville</span>
+      <span class="area-tag">Pennington</span>
+      <span class="area-tag">Hopewell</span>
+      <span class="area-tag">Ewing</span>
+      <span class="area-tag">Lawrenceville</span>
+      <span class="area-tag">Princeton</span>
+      <span class="area-tag">Yardley (PA)</span>
+      <span class="area-tag">New Hope (PA)</span>
+      <span class="area-tag">Lambertville</span>
+      <span class="area-tag">Washington Crossing</span>
+      <span class="area-tag">Hamilton</span>
+      <span class="area-tag">Robbinsville</span>
+    </div>
+  </div></section>
+
+  <section id="contact" class="cta-section">
+    <h2>Ready to Book?</h2>
+    <p>Text or call. We'll get a quote to you within the hour.</p>
+    <a href="tel:+16095551234" class="cta-btn">📞 (609) 555-1234</a>
+    <div class="contact-info">
+      <p>📧 <a href="mailto:cutandclear@email.com">cutandclear@email.com</a></p>
+      <p style="font-size:0.85rem;margin-top:0.3rem;">Text preferred — we respond fastest there</p>
+    </div>
+    <p style="color:#475569;font-size:0.85rem;margin-top:2rem;">
+      Serving Titusville &bull; Licensed &bull; Insured &bull; Free estimates
+    </p>
+  </section>
+
+  <footer>
+    &copy; 2026 Cut and Clear &bull; Titusville, NJ 08560 &bull; Made with 🦞 by Claw
+  </footer>
+</body>
+</html>

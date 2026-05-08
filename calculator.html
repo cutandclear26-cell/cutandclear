@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cut and Clear – Pricing Calculator</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #f4f4f4;
+      color: #1a1a1a;
+      padding: 1rem;
+    }
+    .container { max-width: 600px; margin: 0 auto; }
+
+    h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin: 1.5rem 0 0.25rem;
+    }
+    .sub { color: #6b7280; font-size: 0.9rem; margin-bottom: 1.5rem; }
+
+    .card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+    .card h2 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: #15803d;
+    }
+
+    .form-group { margin-bottom: 1rem; }
+    .form-group label {
+      display: block;
+      font-weight: 500;
+      font-size: 0.9rem;
+      margin-bottom: 0.3rem;
+      color: #374151;
+    }
+    .form-group input, .form-group select {
+      width: 100%;
+      padding: 0.7rem;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+    .form-group input:focus { outline: none; border-color: #15803d; }
+
+    .row { display: flex; gap: 0.75rem; }
+    .row .form-group { flex: 1; }
+
+    .btn {
+      width: 100%;
+      padding: 0.9rem;
+      background: #15803d;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn:hover { background: #166534; }
+    .btn-secondary { background: #374151; }
+    .btn-secondary:hover { background: #1f2937; }
+    .btn-outline { background: transparent; border: 2px solid #15803d; color: #15803d; }
+    .btn-outline:hover { background: #f0fdf4; }
+    .btn-active { background: #15803d; color: #fff; }
+
+    .pricing-toggle { display: flex; gap: 0.5rem; margin-bottom: 1rem; }
+    .pricing-toggle .btn { font-size: 0.85rem; padding: 0.5rem; }
+
+    .result {
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      border-radius: 12px;
+      padding: 1.2rem;
+      margin-top: 1rem;
+      display: none;
+    }
+    .result .line {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.95rem;
+    }
+    .result .line.total {
+      font-weight: 700;
+      font-size: 1.3rem;
+      border-top: 2px solid #bbf7d0;
+      padding-top: 0.5rem;
+      margin-top: 0.5rem;
+      color: #15803d;
+    }
+
+    .tab-bar { display: flex; gap: 0.5rem; margin-bottom: 1rem; }
+    .tab {
+      flex: 1; padding: 0.6rem; text-align: center;
+      background: #e5e7eb; border: none; border-radius: 8px;
+      font-weight: 600; cursor: pointer; font-size: 0.9rem;
+    }
+    .tab.active { background: #15803d; color: #fff; }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    .hidden { display: none; }
+
+    .quote-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.4);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+    }
+    .quote-overlay.show { display: flex; }
+    .quote-popup {
+      background: #fff;
+      border-radius: 16px;
+      padding: 2rem;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+    }
+    .quote-popup h2 { color: #15803d; margin-bottom: 0.5rem; }
+    .quote-popup .price { font-size: 2.5rem; font-weight: 800; color: #15803d; margin: 0.5rem 0; }
+    .quote-popup p { color: #6b7280; font-size: 0.95rem; margin-bottom: 1.5rem; }
+    .quote-popup .send-btn {
+      display: block; width: 100%; padding: 1rem; margin-top: 0.75rem;
+      background: #15803d; color: #fff; font-weight: 700;
+      border: none; border-radius: 12px; font-size: 1.1rem; cursor: pointer;
+    }
+    .quote-popup .send-btn:hover { background: #166534; }
+    .quote-popup .send-btn.gray { background: #374151; }
+    .quote-popup .send-btn.gray:hover { background: #1f2937; }
+    .quote-popup .send-btn.pdf-btn { background: #2563eb; }
+    .quote-popup .send-btn.pdf-btn:hover { background: #1d4ed8; }
+    .quote-popup .close-btn {
+      display: block; width: 100%; padding: 0.7rem; margin-top: 0.5rem;
+      background: none; border: none; color: #6b7280; font-size: 0.9rem; cursor: pointer;
+    }
+
+    footer { text-align: center; padding: 2rem 0 1rem; color: #9ca3af; font-size: 0.8rem; }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>Cut and Clear – Pricing Calculator</h1>
+  <p class="sub">Quick quotes for landscaping &amp; junk removal.</p>
+
+  <div class="tab-bar">
+    <button class="tab active" data-tab="landscaping"> Landscaping</button>
+    <button class="tab" data-tab="junk"> Junk Removal</button>
+  </div>
+
+  <!-- LANDSCAPING -->
+  <div class="tab-content active" id="tab-landscaping">
+    <div class="card">
+      <h2>Landscaping Quote</h2>
+      <div class="pricing-toggle">
+        <button class="btn btn-active" id="ls-hourly-btn" onclick="toggleLS('hourly')"> By the Hour</button>
+        <button class="btn btn-outline" id="ls-flat-btn" onclick="toggleLS('flat')"> Flat Price</button>
+      </div>
+
+      <div id="ls-hourly">
+        <div class="form-group">
+          <label>Job type</label>
+          <select id="ls-type" onchange="checkOther('ls')">
+            <option value="Mowing">Mowing / Lawn maintenance</option>
+            <option value="Cleanup">Cleanup (leaves / brush)</option>
+            <option value="Mulch">Mulch installation</option>
+            <option value="Tree">Tree work / trimming</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div id="ls-other-name" class="form-group hidden">
+          <label>Describe the job</label>
+          <input type="text" id="ls-other-text" placeholder="e.g. paver repair, fence staining" />
+        </div>
+        <div class="row">
+          <div class="form-group"><label>Hours</label><input type="number" id="ls-hours" value="4" min="0.5" step="0.5" /></div>
+          <div class="form-group"><label>Helpers</label><input type="number" id="ls-helpers" value="2" min="0" /></div>
+        </div>
+        <div class="row">
+          <div class="form-group"><label>Rate per guy ($/hr)</label><input type="number" id="ls-rate" value="35" min="1" step="5" /></div>
+          <div class="form-group"><label>Helper pay ($/hr)</label><input type="number" id="ls-helper-pay" value="20" min="0" step="1" /></div>
+        </div>
+        <p style="font-weight:600;color:#15803d;font-size:0.95rem;">Additional costs</p>
+        <div class="row">
+          <div class="form-group"><label>Truck / gas</label><input type="number" id="ls-gas" value="15" min="0" step="5" /></div>
+          <div class="form-group"><label>Trailer fee</label><input type="number" id="ls-trailer" value="0" min="0" step="5" /></div>
+        </div>
+        <div class="form-group"><label>Materials ($)</label><input type="number" id="ls-materials" value="0" min="0" step="5" /></div>
+      </div>
+
+      <div id="ls-flat" class="hidden">
+        <div class="form-group">
+          <label>Job type</label>
+          <select id="ls-flat-type" onchange="checkOther('ls-flat')">
+            <option value="Mowing">Mowing / Lawn maintenance</option>
+            <option value="Cleanup">Cleanup</option>
+            <option value="Mulch">Mulch</option>
+            <option value="Tree">Tree work</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div id="ls-flat-other-name" class="form-group hidden">
+          <label>Describe the job</label>
+          <input type="text" id="ls-flat-other-text" placeholder="e.g. paver repair" />
+        </div>
+        <div class="form-group"><label>Flat price ($)</label><input type="number" id="ls-flat-price" value="200" min="1" step="10" /></div>
+      </div>
+
+      <button class="btn" onclick="calc('ls')">Calculate Price</button>
+
+      <div class="result" id="ls-result">
+        <div class="line"><span>Job:</span><span id="ls-job-name">Mowing</span></div>
+        <div class="line total"><span>Quote amount</span><span id="ls-quote-amount">$420</span></div>
+        <div class="line" style="color:#6b7280;font-size:0.8rem;"><span></span><span id="ls-profit-hide">(Est. profit: $0)</span></div>
+        <button class="btn" style="margin-top:0.75rem;" onclick="showSendPopup('ls')"> Send Quote</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JUNK -->
+  <div class="tab-content" id="tab-junk">
+    <div class="card">
+      <h2>Junk Removal Quote</h2>
+      <div class="pricing-toggle">
+        <button class="btn btn-active" id="jr-hourly-btn" onclick="toggleJR('hourly')"> By the Hour</button>
+        <button class="btn btn-outline" id="jr-flat-btn" onclick="toggleJR('flat')"> Flat Price</button>
+      </div>
+
+      <div id="jr-hourly">
+        <div class="form-group">
+          <label>Load size</label>
+          <select id="jr-size">
+            <option value="0.25">Quarter load</option>
+            <option value="0.5">Half load</option>
+            <option value="1">Full truck/trailer load</option>
+            <option value="1.5">Full + overflow</option>
+          </select>
+        </div>
+        <div class="row">
+          <div class="form-group"><label>Hours</label><input type="number" id="jr-hours" value="1.5" min="0.5" step="0.5" /></div>
+          <div class="form-group"><label>Helpers</label><input type="number" id="jr-helpers" value="1" min="0" /></div>
+        </div>
+        <div class="row">
+          <div class="form-group"><label>Rate per guy ($/hr)</label><input type="number" id="jr-rate" value="40" min="1" step="5" /></div>
+          <div class="form-group"><label>Helper pay ($/hr)</label><input type="number" id="jr-helper-pay" value="20" min="0" step="1" /></div>
+        </div>
+        <p style="font-weight:600;color:#15803d;font-size:0.95rem;">Additional costs</p>
+        <div class="row">
+          <div class="form-group"><label>Truck / gas</label><input type="number" id="jr-gas" value="15" min="0" step="5" /></div>
+          <div class="form-group"><label>Trailer fee</label><input type="number" id="jr-trailer" value="10" min="0" step="5" /></div>
+        </div>
+        <div class="form-group"><label>Dump fee ($)</label><input type="number" id="jr-dump" value="0" min="0" step="5" /></div>
+      </div>
+
+      <div id="jr-flat" class="hidden">
+        <div class="form-group"><label>Flat price ($)</label><input type="number" id="jr-flat-price" value="150" min="1" step="10" /></div>
+      </div>
+
+      <button class="btn" onclick="calc('jr')">Calculate Price</button>
+
+      <div class="result" id="jr-result">
+        <div class="line"><span>Job:</span><span id="jr-job-name">Junk removal</span></div>
+        <div class="line total"><span>Quote amount</span><span id="jr-quote-amount">$120</span></div>
+        <div class="line" style="color:#6b7280;font-size:0.8rem;"><span></span><span id="jr-profit-hide">(Est. profit: $0)</span></div>
+        <button class="btn" style="margin-top:0.75rem;" onclick="showSendPopup('jr')"> Send Quote</button>
+      </div>
+    </div>
+  </div>
+
+  <footer>Cut and Clear</footer>
+</div>
+
+<!-- Send Quote Popup -->
+<div class="quote-overlay" id="send-popup">
+  <div class="quote-popup">
+    <h2>Cut and Clear</h2>
+    <div style="color:#6b7280;font-size:0.9rem;" id="popup-job-type">Mowing</div>
+    <div class="price" id="popup-price">$420</div>
+    <p>Quick quote for your job. Fair price, no hidden fees.</p>
+
+    <button class="send-btn" id="popup-text-btn"> Send via Text</button>
+    <button class="send-btn gray" id="popup-email-btn"> Send via Email</button>
+    <button class="send-btn pdf-btn" id="popup-pdf-btn"> Download PDF to Share</button>
+    <button class="close-btn" onclick="closeSendPopup()">Cancel</button>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script>
+  let lsMode = 'hourly', jrMode = 'hourly';
+  let lastCalc = { name: '', price: 0 };
+
+  function toggleLS(m) { lsMode = m;
+    document.getElementById('ls-hourly').classList.toggle('hidden', m!='hourly');
+    document.getElementById('ls-flat').classList.toggle('hidden', m!='flat');
+    document.getElementById('ls-hourly-btn').className = m=='hourly'?'btn btn-active':'btn btn-outline';
+    document.getElementById('ls-flat-btn').className = m=='flat'?'btn btn-active':'btn btn-outline';
+  }
+  function toggleJR(m) { jrMode = m;
+    document.getElementById('jr-hourly').classList.toggle('hidden', m!='hourly');
+    document.getElementById('jr-flat').classList.toggle('hidden', m!='flat');
+    document.getElementById('jr-hourly-btn').className = m=='hourly'?'btn btn-active':'btn btn-outline';
+    document.getElementById('jr-flat-btn').className = m=='flat'?'btn btn-active':'btn btn-outline';
+  }
+
+  function checkOther(pre) {
+    const sel = document.getElementById(pre+'-type');
+    const otherDiv = document.getElementById(pre+'-other-name');
+    if (otherDiv) otherDiv.classList.toggle('hidden', sel.value !== 'Other');
+  }
+
+  function getJobName(pre) {
+    const isFlat = (pre === 'ls' && lsMode === 'flat') || (pre === 'ls-flat');
+    const selId = isFlat ? 'ls-flat-type' : (pre === 'jr' ? null : 'ls-type');
+    const otherId = isFlat ? 'ls-flat-other-text' : (pre === 'jr' ? null : 'ls-other-text');
+    if (pre === 'jr') return 'Junk removal';
+    const val = document.getElementById(selId).value;
+    if (val === 'Other') return document.getElementById(otherId).value || 'Other job';
+    return val;
+  }
+
+  function calc(pre) {
+    const isLS = pre === 'ls';
+    const mode = isLS ? lsMode : jrMode;
+    let price = 0, profit = 0;
+
+    if (mode === 'flat') {
+      const id = isLS ? 'ls-flat-price' : 'jr-flat-price';
+      price = parseFloat(document.getElementById(id).value) || 0;
+    } else {
+      const h = isLS ? 'ls' : 'jr';
+      const hrs = parseFloat(document.getElementById(h+'-hours').value) || 0;
+      const helpers = parseInt(document.getElementById(h+'-helpers').value) || 0;
+      const rate = parseFloat(document.getElementById(h+'-rate').value) || 0;
+      const pay = parseFloat(document.getElementById(h+'-helper-pay').value) || 0;
+      const gas = parseFloat(document.getElementById(h+'-gas').value) || 0;
+      const trailer = parseFloat(document.getElementById(h+'-trailer').value) || 0;
+      const extra = parseFloat(document.getElementById(h+'-dump')?.value) || parseFloat(document.getElementById(h+'-materials')?.value) || 0;
+
+      const guys = 1 + helpers;
+      price = rate * guys * hrs;
+      const costs = pay * helpers * hrs + gas + trailer + extra;
+      profit = price - costs;
+    }
+
+    const name = getJobName(pre);
+    lastCalc = { name, price };
+
+    document.getElementById(pre+'-job-name').textContent = name;
+    document.getElementById(pre+'-quote-amount').textContent = '$' + price.toFixed(0);
+    document.getElementById(pre+'-profit-hide').textContent = '(Est. profit: $' + profit.toFixed(0) + ')';
+    document.getElementById(pre+'-result').style.display = 'block';
+  }
+
+  function showSendPopup(pre) {
+    const name = document.getElementById(pre+'-job-name').textContent;
+    const amount = document.getElementById(pre+'-quote-amount').textContent;
+
+    document.getElementById('popup-job-type').textContent = name;
+    document.getElementById('popup-price').textContent = amount;
+
+    const msg = encodeURIComponent('Cut and Clear quote for ' + name + ': ' + amount + '. Fair price, no hidden fees. Reply to schedule!');
+    const subject = encodeURIComponent('Quote from Cut and Clear');
+    const body = encodeURIComponent('Cut and Clear\n\nJob: ' + name + '\nTotal: ' + amount + '\n\nFair price, no hidden fees. Reply to schedule!\n\n(609) 555-1234');
+
+    document.getElementById('popup-text-btn').onclick = function() { window.open('sms:?&body=' + msg, '_blank'); };
+    document.getElementById('popup-email-btn').onclick = function() { window.open('mailto:?subject=' + subject + '&body=' + body, '_blank'); };
+    document.getElementById('popup-pdf-btn').onclick = function() { generatePDF(name, amount); };
+
+    document.getElementById('send-popup').classList.add('show');
+  }
+
+  function closeSendPopup() { document.getElementById('send-popup').classList.remove('show'); }
+
+  function generatePDF(jobName, amount) {
+    // Build a clean quote document
+    const today = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+    
+    const quoteHtml = `
+      <div id="pdf-quote" style="font-family:Helvetica,Arial,sans-serif;padding:40px 30px;max-width:400px;margin:0 auto;">
+        <div style="text-align:center;border-bottom:3px solid #15803d;padding-bottom:15px;margin-bottom:25px;">
+          <h1 style="font-size:28px;color:#15803d;margin:0;">Cut and Clear</h1>
+          <p style="color:#6b7280;font-size:14px;margin:4px 0 0;">Landscaping &amp; Junk Removal</p>
+        </div>
+
+        <div style="text-align:center;margin-bottom:30px;">
+          <p style="color:#6b7280;font-size:13px;margin:0 0 10px;">Quote for:</p>
+          <div style="font-size:18px;font-weight:600;color:#1a1a1a;">${jobName}</div>
+          <div style="font-size:36px;font-weight:800;color:#15803d;margin:15px 0 5px;">${amount}</div>
+          <p style="color:#6b7280;font-size:13px;margin:0;">Fair price, no hidden fees</p>
+        </div>
+
+        <div style="border-top:1px solid #e5e7eb;padding-top:20px;font-size:13px;color:#6b7280;">
+          <p style="margin:0 0 5px;">Date: ${today}</p>
+          <p style="margin:0 0 5px;">Titusville, NJ</p>
+          <p style="margin:0;">Text or call to schedule: (609) 555-1234</p>
+        </div>
+
+        <div style="margin-top:30px;padding-top:15px;border-top:1px solid #e5e7eb;text-align:center;color:#9ca3af;font-size:11px;">
+          Cut and Clear &bull; Titusville, NJ 08560
+        </div>
+      </div>
+    `;
+
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = quoteHtml;
+    document.body.appendChild(tempDiv);
+    const element = document.getElementById('pdf-quote');
+
+    const opt = {
+      margin:       0,
+      filename:     'CutAndClear-Quote.pdf',
+      image:        { type: 'jpeg', quality: 1 },
+      html2canvas:  { scale: 2, useCORS: true },
+      jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+    };
+
+    html2pdf().set(opt).from(element).save().then(() => {
+      element.remove();
+      closeSendPopup();
+    }).catch(() => {
+      element.remove();
+      alert('PDF download failed. Try the Text or Email option instead.');
+    });
+  }
+
+  // Tabs
+  document.querySelectorAll('.tab').forEach(t => {
+    t.addEventListener('click', function() {
+      document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(x => x.classList.remove('active'));
+      this.classList.add('active');
+      document.getElementById('tab-' + this.dataset.tab).classList.add('active');
+    });
+  });
+
+  document.getElementById('send-popup').addEventListener('click', function(e) {
+    if (e.target === this) closeSendPopup();
+  });
+
+  calc('ls');
+</script>
+</body>
+</html>
