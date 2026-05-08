@@ -224,7 +224,7 @@
         <div class="line"><span>Job:</span><span id="ls-job-name">Mowing</span></div>
         <div class="line total"><span>Quote amount</span><span id="ls-quote-amount">$420</span></div>
         <div class="line" style="color:#6b7280;font-size:0.8rem;"><span></span><span id="ls-profit-hide">(Est. profit: $0)</span></div>
-        <button class="btn" style="margin-top:0.75rem;" onclick="sendAndPDF('ls')"> Send Quote</button>
+        <button class="btn" style="margin-top:0.75rem;" onclick="showSendPopup('ls')"> Send Quote</button>
       </div>
     </div>
   </div>
@@ -274,7 +274,7 @@
         <div class="line"><span>Job:</span><span id="jr-job-name">Junk removal</span></div>
         <div class="line total"><span>Quote amount</span><span id="jr-quote-amount">$120</span></div>
         <div class="line" style="color:#6b7280;font-size:0.8rem;"><span></span><span id="jr-profit-hide">(Est. profit: $0)</span></div>
-        <button class="btn" style="margin-top:0.75rem;" onclick="sendAndPDF('jr')"> Send Quote</button>
+        <button class="btn" style="margin-top:0.75rem;" onclick="showSendPopup('jr')"> Send Quote</button>
       </div>
     </div>
   </div>
@@ -282,14 +282,18 @@
   <footer>Cut and Clear</footer>
 </div>
 
-<!-- Send confirmation (shows briefly, then auto-opens) -->
+<!-- Send Quote Popup -->
 <div class="quote-overlay" id="send-popup">
   <div class="quote-popup">
-    <h2>✓ Quote Generated!</h2>
-    <div style="color:#6b7280;font-size:0.9rem;margin:0.5rem 0;" id="popup-job-type">Mowing</div>
+    <h2>Cut and Clear</h2>
+    <div style="color:#6b7280;font-size:0.9rem;" id="popup-job-type">Mowing</div>
     <div class="price" id="popup-price">$420</div>
-    <p>Text should open with the quote. PDF is downloading — <strong>attach it to the text</strong> before sending for a professional look.</p>
-    <button class="close-btn" onclick="closeSendPopup()">OK</button>
+    <p>Quick quote for your job. Fair price, no hidden fees.</p>
+
+    <button class="send-btn" id="popup-text-btn">📤 Send via Text</button>
+    <button class="send-btn gray" id="popup-email-btn">📧 Send via Email</button>
+    <button class="send-btn pdf-btn" id="popup-pdf-btn">📄 Download PDF to Share</button>
+    <button class="close-btn" onclick="closeSendPopup()">Cancel</button>
   </div>
 </div>
 
@@ -360,23 +364,22 @@
     document.getElementById(pre+'-result').style.display = 'block';
   }
 
-  function sendAndPDF(pre) {
+  function showSendPopup(pre) {
     const name = document.getElementById(pre+'-job-name').textContent;
     const amount = document.getElementById(pre+'-quote-amount').textContent;
 
-    // Show the popup
     document.getElementById('popup-job-type').textContent = name;
     document.getElementById('popup-price').textContent = amount;
-    document.getElementById('send-popup').classList.add('show');
 
-    // Open SMS with the quote text
     const msg = encodeURIComponent('Cut and Clear quote for ' + name + ': ' + amount + '. Fair price, no hidden fees. Reply to schedule!');
-    window.open('sms:?&body=' + msg, '_blank');
+    const subject = encodeURIComponent('Quote from Cut and Clear');
+    const body = encodeURIComponent('Cut and Clear\n\nJob: ' + name + '\nTotal: ' + amount + '\n\nFair price, no hidden fees. Reply to schedule!\n\n(609) 555-1234');
 
-    // Also generate the PDF (delayed slightly so it doesn't interfere)
-    setTimeout(function() {
-      generatePDF(name, amount);
-    }, 500);
+    document.getElementById('popup-text-btn').onclick = function() { window.open('sms:?&body=' + msg, '_blank'); };
+    document.getElementById('popup-email-btn').onclick = function() { window.open('mailto:?subject=' + subject + '&body=' + body, '_blank'); };
+    document.getElementById('popup-pdf-btn').onclick = function() { generatePDF(name, amount); };
+
+    document.getElementById('send-popup').classList.add('show');
   }
 
   function closeSendPopup() { document.getElementById('send-popup').classList.remove('show'); }
