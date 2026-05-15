@@ -86,6 +86,7 @@
     .area-grid { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
     .area-tag { background: #1e293b; border: 1px solid #334155; border-radius: 50px; padding: 0.5rem 1rem; font-size: 0.85rem; color: #94a3b8; }
 
+    /* Contact Form */
     .contact-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -100,5 +101,237 @@
     .contact-form {
       background: #1e293b;
       border: 1px solid #334155;
-      border-r
-...(truncated)...
+      border-radius: 16px;
+      padding: 1.5rem;
+    }
+    .contact-form .form-group { margin-bottom: 1rem; }
+    .contact-form label {
+      display: block;
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: #94a3b8;
+      margin-bottom: 0.3rem;
+    }
+    .contact-form input,
+    .contact-form select,
+    .contact-form textarea {
+      width: 100%;
+      padding: 0.7rem;
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      color: #f0f0f0;
+      font-size: 0.95rem;
+      font-family: inherit;
+    }
+    .contact-form input:focus,
+    .contact-form select:focus,
+    .contact-form textarea:focus {
+      outline: none;
+      border-color: #22c55e;
+    }
+    .contact-form textarea { resize: vertical; min-height: 80px; }
+    .form-submit {
+      width: 100%;
+      padding: 0.8rem;
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      color: #0f172a;
+      font-weight: 700;
+      font-size: 1rem;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .form-submit:hover { transform: scale(1.02); }
+    .form-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+    .form-success {
+      display: none;
+      color: #22c55e;
+      text-align: center;
+      padding: 1rem;
+      font-weight: 600;
+    }
+    .form-error {
+      display: none;
+      color: #ef4444;
+      text-align: center;
+      padding: 1rem;
+      font-weight: 600;
+    }
+
+    .cta-section { text-align: center; padding: 4rem 2rem; border-top: 1px solid #334155; }
+    .cta-section h2 { color: #22c55e; }
+    .cta-section p { color: #94a3b8; margin: 1rem auto 2rem; max-width: 500px; }
+
+    footer { text-align: center; padding: 2rem; color: #475569; font-size: 0.85rem; border-top: 1px solid #1e293b; }
+    footer a { color: #475569; text-decoration: none; }
+    footer a:hover { color: #22c55e; }
+  </style>
+</head>
+<body>
+  <section class="hero">
+    <p class="tagline">Cut the grass. Clear the junk. Done.</p>
+    <h1>Cut and Clear</h1>
+    <p class="location">Titusville, NJ 08560 and surrounding areas</p>
+    <p class="subtitle">Lawn care, landscaping, tree work, fencing, gutters, junk removal, and more.</p>
+    <a href="#contact" class="cta-btn">Get a Free Quote</a>
+  </section>
+
+  <section><div class="container">
+    <h2>What We Do</h2>
+    <p class="lead">If it's outside, we handle it. One call does it all — no subbing out, no runaround.</p>
+    <div class="services">
+      <div class="service-card"><div class="icon">🌿</div><h3>Lawn Care &amp; Mowing</h3><p>Weekly or bi-weekly mowing, edging, trimming, and blowing. Clean, professional results.</p></div>
+      <div class="service-card"><div class="icon">🍂</div><h3>Cleanups &amp; Mulch</h3><p>Spring/fall leaf removal, brush clearing, flowerbed prep, mulch installation, yard waste hauling.</p></div>
+      <div class="service-card"><div class="icon">🌳</div><h3>Tree &amp; Shrub Work</h3><p>Trimming, pruning, limb removal, small takedowns, stump grinding, and shrub maintenance.</p></div>
+      <div class="service-card"><div class="icon">🏗️</div><h3>Hardscaping &amp; Fencing</h3><p>Patios, pavers, retaining walls, gravel paths, fence installation and repair, concrete work.</p></div>
+      <div class="service-card"><div class="icon">💧</div><h3>Gutters &amp; Drainage</h3><p>Gutter cleaning, gutter guards, downspout repairs, French drains, yard grading, dry wells.</p></div>
+      <div class="service-card"><div class="icon">🗑️</div><h3>Junk Removal</h3><p>Furniture, appliances, yard waste, construction debris, estate cleanouts. Load it, haul it, dump it.</p></div>
+      <div class="service-card"><div class="icon">🪚</div><h3>Power Washing &amp; More</h3><p>Driveway and deck power washing, exterior painting (limited), Christmas lights, and odd jobs.</p></div>
+    </div>
+  </div></section>
+
+  <section style="background:#1e293b;"><div class="container">
+    <h2>Why Cut and Clear?</h2>
+    <p class="lead">Small operation, big effort. Your property gets treated like it's ours.</p>
+    <div class="why-list">
+      <div class="why-item"><div class="icon">⏱️</div><h4>Fast Response</h4><p>Same-week scheduling. Text or call, we show up.</p></div>
+      <div class="why-item"><div class="icon">💰</div><h4>Fair Pricing</h4><p>No hidden fees. Hourly or flat-rate, you pick. Free estimates.</p></div>
+      <div class="why-item"><div class="icon">🧹</div><h4>Clean Job Sites</h4><p>We don't leave a mess. Raked, blown, swept — ready for you.</p></div>
+      <div class="why-item"><div class="icon">🏡</div><h4>Local Family Biz</h4><p>Titusville based. Serving Mercer, Bucks, and Hunterdon counties.</p></div>
+    </div>
+  </div></section>
+
+  <section><div class="container">
+    <h2>Service Area</h2>
+    <p class="lead">Titusville and everything within 20 minutes.</p>
+    <div class="area-grid">
+      <span class="area-tag">Titusville</span>
+      <span class="area-tag">Pennington</span>
+      <span class="area-tag">Hopewell</span>
+      <span class="area-tag">Ewing</span>
+      <span class="area-tag">Lawrenceville</span>
+      <span class="area-tag">Princeton</span>
+      <span class="area-tag">Yardley (PA)</span>
+      <span class="area-tag">New Hope (PA)</span>
+      <span class="area-tag">Lambertville</span>
+      <span class="area-tag">Washington Crossing</span>
+      <span class="area-tag">Hamilton</span>
+      <span class="area-tag">Robbinsville</span>
+    </div>
+  </div></section>
+
+  <section id="contact" class="cta-section">
+    <h2>Ready to Book?</h2>
+    <p>Text, call, or fill out the form. We'll get back to you fast.</p>
+
+    <div class="contact-grid">
+      <!-- Contact Form — writes directly to the lead sheet -->
+      <form class="contact-form" id="quoteForm">
+        <div class="form-group">
+          <label for="name">Your Name *</label>
+          <input type="text" id="name" name="Name" required />
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone *</label>
+          <input type="tel" id="phone" name="Phone" required />
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="Email" />
+        </div>
+        <div class="form-group">
+          <label for="service">Service Needed *</label>
+          <select id="service" name="Service" required>
+            <option value="">Select one...</option>
+            <option>Lawn Mowing</option>
+            <option>Leaf / Brush Cleanup</option>
+            <option>Mulch Installation</option>
+            <option>Tree Trimming</option>
+            <option>Tree / Stump Removal</option>
+            <option>Fence Installation / Repair</option>
+            <option>Gutter Cleaning</option>
+            <option>Junk Removal</option>
+            <option>Power Washing</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="message">Tell us about the job *</label>
+          <textarea id="message" name="Message" required placeholder="Approximate size, location, any details..."></textarea>
+        </div>
+        <button type="submit" class="form-submit" id="submitBtn">Send Quote Request</button>
+        <div class="form-success" id="formSuccess">✅ Thanks! We'll get back to you shortly.</div>
+        <div class="form-error" id="formError">⚠️ Something went wrong. Please text or call instead.</div>
+      </form>
+
+      <!-- Contact Info -->
+      <div style="text-align:center;display:flex;flex-direction:column;justify-content:center;gap:1.5rem;">
+        <div>
+          <p style="color:#64748b;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.1em;">Call or Text</p>
+          <a href="tel:+16099822182" style="font-size:1.8rem;font-weight:700;color:#22c55e;text-decoration:none;">(609) 982-2182</a>
+          <p style="color:#94a3b8;font-size:0.85rem;">Text preferred — fastest response</p>
+        </div>
+        <div>
+          <p style="color:#64748b;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.1em;">Email</p>
+          <a href="mailto:cutandclear26@gmail.com" style="color:#22c55e;font-size:1rem;">cutandclear26@gmail.com</a>
+        </div>
+        <div>
+          <a href="https://g.page/r/CfzTvW7Cs4xEEBM/review" target="_blank" style="color:#94a3b8;font-size:0.9rem;">⭐ Leave a Google Review</a>
+        </div>
+      </div>
+    </div>
+
+    <p style="color:#475569;font-size:0.85rem;margin-top:2rem;">
+      Titusville &bull; Pennington &bull; Hopewell &bull; Princeton &bull; Yardley &bull; Free estimates
+    </p>
+  </section>
+
+  <footer>
+    &copy; 2026 Cut and Clear &bull; Titusville, NJ 08560
+  </footer>
+
+  <script>
+    const FORM_URL = 'https://script.google.com/macros/s/AKfycbxNYct1owsyzhQ_-fQnCIQq3qWTb59X3c3_0nUdsjUEqphvi_d4WQGL5S1shU3gAcPH/exec';
+
+    document.getElementById('quoteForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const btn = document.getElementById('submitBtn');
+      const success = document.getElementById('formSuccess');
+      const error = document.getElementById('formError');
+      success.style.display = 'none';
+      error.style.display = 'none';
+      btn.disabled = true;
+      btn.textContent = 'Sending...';
+
+      try {
+        const formData = new URLSearchParams({
+          Name: document.getElementById('name').value,
+          Phone: document.getElementById('phone').value,
+          Email: document.getElementById('email').value,
+          Service: document.getElementById('service').value,
+          Message: document.getElementById('message').value
+        });
+
+        await fetch(FORM_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: formData
+        });
+
+        success.style.display = 'block';
+        this.reset();
+        btn.textContent = 'Send Quote Request';
+        btn.disabled = false;
+      } catch (err) {
+        error.style.display = 'block';
+        btn.textContent = 'Send Quote Request';
+        btn.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>
+
