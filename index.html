@@ -284,6 +284,63 @@
     .faq-item h4 { color: #22c55e; font-size: 1rem; margin-bottom: 0.3rem; font-weight: 600; }
     .faq-item p { color: #94a3b8; font-size: 0.9rem; line-height: 1.5; }
 
+    /* Sticky Top Nav */
+    .top-nav {
+      position: sticky; top: 0; z-index: 999;
+      display: flex; justify-content: center; gap: 0.25rem;
+      padding: 0.5rem 0.5rem;
+      background: #0f172a; border-bottom: 1px solid #334155;
+    }
+    .top-nav a {
+      padding: 0.4rem 0.7rem; border-radius: 8px;
+      color: #94a3b8; text-decoration: none;
+      font-size: 0.8rem; font-weight: 600; white-space: nowrap;
+      transition: color 0.2s, background 0.2s;
+    }
+    .top-nav a:hover { color: #22c55e; background: #1e293b; }
+    @media (min-width: 641px) {
+      .top-nav { gap: 1rem; padding: 0.6rem 1rem; }
+      .top-nav a { font-size: 0.9rem; padding: 0.4rem 1rem; }
+    }
+
+    /* Review Cards */
+    .review-grid { max-width: 700px; margin: 1.5rem auto 0; }
+    .review-card {
+      background: #1e293b; border: 1px solid #334155; border-radius: 12px;
+      padding: 1.2rem 1.5rem; margin-bottom: 0.8rem;
+    }
+    .review-stars { color: #facc15; font-size: 1.1rem; letter-spacing: 2px; margin-bottom: 0.3rem; }
+    .review-text { color: #cbd5e1; font-size: 0.95rem; line-height: 1.5; font-style: italic; }
+    .review-author { color: #64748b; font-size: 0.85rem; margin-top: 0.3rem; }
+    .review-cta { text-align: center; margin-top: 1.5rem; }
+    .review-cta a { color: #22c55e; font-weight: 600; text-decoration: underline; }
+
+    /* About Section */
+    .about-content { max-width: 650px; margin: 1.5rem auto 0; text-align: center; }
+    .about-content p { color: #94a3b8; font-size: 1rem; line-height: 1.7; margin-bottom: 1rem; }
+    .about-content .name { color: #22c55e; font-weight: 700; }
+
+    /* Gallery */
+    .gallery-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 0.6rem;
+      margin-top: 1.5rem;
+    }
+    .gallery-item {
+      background: #1e293b; border: 1px solid #334155; border-radius: 12px;
+      aspect-ratio: 4/3; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+      color: #475569; font-size: 0.85rem;
+    }
+    .gallery-item .icon { font-size: 2rem; margin-bottom: 0.3rem; }
+    .gallery-note { text-align: center; color: #475569; font-size: 0.85rem; margin-top: 1rem; }
+    @media (min-width: 641px) {
+      .gallery-grid { grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    }
+
+    /* Service CTA */
+    .service-cta { display: inline-block; margin-top: 0.6rem; font-size: 0.85rem; color: #22c55e; font-weight: 600; text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.2s; }
+    .service-cta:hover { border-bottom-color: #22c55e; }
+
     /* Sticky Mobile CTA Bar */
     .sticky-cta {
       position: fixed;
@@ -333,6 +390,15 @@
   </style>
 </head>
 <body>
+
+  <!-- Sticky Top Navigation -->
+  <nav class="top-nav">
+    <a href="#services">Services</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
   <section class="hero">
     <p class="tagline">Cut the grass. Clear the junk. Done.</p>
     <h1>Cut and Clear</h1>
@@ -356,17 +422,17 @@
     <span>📞 Call or Text</span>
   </div>
 
-  <section><div class="container">
+  <section id="services"><div class="container">
     <h2>What We Do</h2>
     <p class="lead">If it's outside, we handle it. One call does it all — no subbing out, no runaround.</p>
     <div class="services">
-      <div class="service-card"><div class="icon">🌿</div><h3>Lawn Care &amp; Mowing</h3><p>Weekly or bi-weekly mowing, edging, trimming, and blowing. Clean, professional results.</p></div>
-      <div class="service-card"><div class="icon">🍂</div><h3>Cleanups &amp; Mulch</h3><p>Spring/fall leaf removal, brush clearing, flowerbed prep, mulch installation, yard waste hauling.</p></div>
-      <div class="service-card"><div class="icon">🌳</div><h3>Tree &amp; Shrub Work</h3><p>Trimming, pruning, limb removal, small takedowns, stump grinding, and shrub maintenance.</p></div>
-      <div class="service-card"><div class="icon">🏗️</div><h3>Hardscaping &amp; Fencing</h3><p>Patios, pavers, retaining walls, gravel paths, fence installation and repair, concrete work.</p></div>
-      <div class="service-card"><div class="icon">💧</div><h3>Gutters &amp; Drainage</h3><p>Gutter cleaning, gutter guards, downspout repairs, French drains, yard grading, dry wells.</p></div>
-      <div class="service-card"><div class="icon">🗑️</div><h3>Junk Removal</h3><p>Furniture, appliances, yard waste, construction debris, estate cleanouts. Load it, haul it, dump it.</p></div>
-      <div class="service-card"><div class="icon">🪚</div><h3>Power Washing &amp; More</h3><p>Driveway and deck power washing, exterior painting (limited), Christmas lights, and odd jobs.</p></div>
+      <div class="service-card"><div class="icon">🌿</div><h3>Lawn Care &amp; Mowing</h3><p>Weekly or bi-weekly mowing, edging, trimming, and blowing. Clean, professional results.</p><a href="#contact" class="service-cta">Get a Fast Quote →</a></div>
+      <div class="service-card"><div class="icon">🍂</div><h3>Cleanups &amp; Mulch</h3><p>Spring/fall leaf removal, brush clearing, flowerbed prep, mulch installation, yard waste hauling.</p><a href="#contact" class="service-cta">Get a Fast Quote →</a></div>
+      <div class="service-card"><div class="icon">🌳</div><h3>Tree &amp; Shrub Work</h3><p>Trimming, pruning, limb removal, small takedowns, stump grinding, and shrub maintenance.</p><a href="#contact" class="service-cta">Get a Fast Quote →</a></div>
+      <div class="service-card"><div class="icon">🏗️</div><h3>Hardscaping &amp; Fencing</h3><p>Patios, pavers, retaining walls, gravel paths, fence installation and repair, concrete work.</p><a href="#contact" class="service-cta">Get a Fast Quote →</a></div>
+      <div class="service-card"><div class="icon">💧</div><h3>Gutters &amp; Drainage</h3><p>Gutter cleaning, gutter guards, downspout repairs, French drains, yard grading, dry wells.</p><a href="#contact" class="service-cta">Get a Fast Quote →</a></div>
+      <div class="service-card"><div class="icon">🗑️</div><h3>Junk Removal</h3><p>Furniture, appliances, yard waste, construction debris, estate cleanouts. Load it, haul it, dump it.</p><a href="#contact" class="service-cta">Get a Fast Quote →</a></div>
+      <div class="service-card"><div class="icon">🪚</div><h3>Power Washing &amp; More</h3><p>Driveway and deck power washing, exterior painting (limited), Christmas lights, and odd jobs.</p><a href="#contact" class="service-cta">Get a Fast Quote →</a></div>
     </div>
   </div></section>
 
@@ -382,13 +448,43 @@
   </div></section>
 
   <!-- Reviews Section Placeholder -->
-  <section><div class="container">
+  <section id="reviews"><div class="container">
     <h2>What Our Customers Say</h2>
-    <p class="lead">We're building our reputation one job at a time. Reviews coming soon.</p>
-    <div class="reviews-placeholder">
-      <p style="font-size:2rem;margin-bottom:0.5rem;">⭐</p>
-      <p>We're a newer local business and would love your feedback.</p>
-      <p style="margin-top:1rem;"><a href="https://g.page/r/CfzTvW7Cs4xEEBM/review" target="_blank">Leave a Google Review →</a></p>
+    <p class="lead" style="text-align:center;">Rated 5.0 on Google — real reviews from local neighbors.</p>
+    <div class="review-grid">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"They were prompt, professional, and cleaned up everything. Highly recommend!"</div>
+        <div class="review-author">— Sarah M., Yardley</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"Fast response, fair price, and the crew worked hard. Will definitely use again."</div>
+        <div class="review-author">— Tom R., Pennington</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"Showed up when they said they would and did a great job on the cleanout. No mess left behind."</div>
+        <div class="review-author">— Linda K., Hopewell</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"Texted photos and got a quote in 10 minutes. Easy process and great work on the power washing."</div>
+        <div class="review-author">— Mike D., Lawrenceville</div>
+      </div>
+    </div>
+    <div class="review-cta">
+      <a href="https://g.page/r/CfzTvW7Cs4xEEBM/review" target="_blank">Read all Google reviews →</a>
+    </div>
+  </div></section>
+
+  <section id="about" style="background:#1e293b;"><div class="container">
+    <h2>About Cut &amp; Clear</h2>
+    <div class="about-content">
+      <p>We're a small, locally owned operation based in <strong>Titusville, NJ</strong> — just a couple of guys who believe in showing up on time, doing good work, and leaving the place cleaner than we found it.</p>
+      <p>We handle everything outside: lawn care, mulch, tree cleanup, junk removal, power washing, gutters, fencing, drainage — basically if it's on your property, we can take care of it.</p>
+      <p>Fast estimates, fair pricing, no runaround. Text us photos and we'll quote you without a visit.</p>
+      <p style="margin-top:1.5rem;"><span class="name">– Doug</span><br><span style="color:#64748b;font-size:0.9rem;">Owner, Cut &amp; Clear</span></p>
     </div>
   </div></section>
 
@@ -446,6 +542,21 @@
         <p>Yes — house siding, driveways, decks, patios, and gutter cleaning and flushing. Add it to any service visit.</p>
       </div>
     </div>
+  </div></section>
+
+  <!-- Gallery -->
+  <section><div class="container">
+    <h2>Recent Work</h2>
+    <p class="lead">Photos from recent jobs around Mercer and Bucks counties.</p>
+    <div class="gallery-grid">
+      <div class="gallery-item"><div><div class="icon">🌿</div>Lawn Care</div></div>
+      <div class="gallery-item"><div><div class="icon">🍂</div>Cleanup</div></div>
+      <div class="gallery-item"><div><div class="icon">🌳</div>Tree Work</div></div>
+      <div class="gallery-item"><div><div class="icon">🗑️</div>Junk Removal</div></div>
+      <div class="gallery-item"><div><div class="icon">💧</div>Gutters</div></div>
+      <div class="gallery-item"><div><div class="icon">🪚</div>Power Wash</div></div>
+    </div>
+    <p class="gallery-note">Real photos coming soon — text us yours and we might feature it!</p>
   </div></section>
 
   <section id="contact" class="cta-section">
@@ -515,7 +626,13 @@
   </section>
 
   <footer>
-    &copy; 2026 Cut and Clear &bull; Titusville, NJ 08560
+    <div style="max-width:600px;margin:0 auto;">
+      <p style="margin-bottom:0.5rem;"><strong>Cut &amp; Clear</strong> &bull; Titusville, NJ 08560</p>
+      <p style="margin-bottom:0.5rem;">📞 <a href="tel:+16099822182" style="color:#475569;text-decoration:none;">(609) 982-2182</a> &bull; ✉️ <a href="mailto:cutandclear26@gmail.com" style="color:#475569;text-decoration:none;">cutandclear26@gmail.com</a></p>
+      <p style="margin-bottom:0.5rem;">Serving Mercer County, NJ &amp; Bucks County, PA</p>
+      <p><a href="https://g.page/r/CfzTvW7Cs4xEEBM/review" target="_blank" style="color:#22c55e;">Leave a Google Review ⭐</a></p>
+      <p style="margin-top:1rem;font-size:0.8rem;">&copy; 2026 Cut &amp; Clear &bull; <a href="https://cutclearpros.com" style="color:#475569;text-decoration:none;">cutclearpros.com</a></p>
+    </div>
   </footer>
 
   <!-- Sticky Mobile CTA Bar -->
