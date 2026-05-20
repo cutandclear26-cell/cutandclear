@@ -164,6 +164,111 @@
     .cta-section h2 { color: #22c55e; }
     .cta-section p { color: #94a3b8; margin: 1rem auto 2rem; max-width: 500px; }
 
+    /* Hero CTA Group */
+    .hero-ctas { display: flex; flex-direction: column; align-items: center; gap: 1rem; margin-top: 1.5rem; }
+    .hero-ctas .cta-primary {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 1rem 2.5rem;
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      color: #0f172a;
+      font-weight: 700;
+      font-size: 1.3rem;
+      border: none;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .hero-ctas .cta-primary:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(34,197,94,0.3); }
+    .hero-ctas .cta-secondary {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      color: #22c55e;
+      font-weight: 600;
+      font-size: 1rem;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s;
+    }
+    .hero-ctas .cta-secondary:hover { border-bottom-color: #22c55e; }
+    .hero-ctas .cta-form {
+      color: #64748b;
+      font-size: 0.9rem;
+      text-decoration: underline;
+      transition: color 0.2s;
+    }
+    .hero-ctas .cta-form:hover { color: #22c55e; }
+
+    /* Trust Strip */
+    .trust-strip {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.4rem 1.5rem;
+      padding: 0.8rem 1rem;
+      background: #1e293b;
+      border-top: 1px solid #334155;
+      border-bottom: 1px solid #334155;
+      font-size: 0.8rem;
+      color: #94a3b8;
+    }
+    .trust-strip span { white-space: nowrap; }
+    .trust-strip .dot { color: #22c55e; margin: 0 0.2rem; }
+
+    /* Reviews Section Placeholder */
+    .reviews-placeholder {
+      text-align: center;
+      padding: 2rem;
+      background: #1e293b;
+      border: 1px dashed #334155;
+      border-radius: 16px;
+      max-width: 500px;
+      margin: 1.5rem auto 0;
+    }
+    .reviews-placeholder p { color: #64748b; font-size: 0.9rem; }
+    .reviews-placeholder a { color: #22c55e; }
+
+    /* Sticky Mobile CTA Bar */
+    .sticky-cta {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      display: none;
+      background: #0f172a;
+      border-top: 1px solid #334155;
+      padding: 0.6rem 0.8rem;
+      z-index: 1000;
+      gap: 0.5rem;
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.4);
+    }
+    @media (max-width: 768px) {
+      .sticky-cta { display: flex; }
+      body { padding-bottom: 4rem; }
+    }
+    .sticky-cta a {
+      flex: 1;
+      text-align: center;
+      padding: 0.7rem 0.5rem;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      text-decoration: none;
+      transition: transform 0.15s;
+    }
+    .sticky-cta a:active { transform: scale(0.97); }
+    .sticky-cta .sticky-call {
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      color: #0f172a;
+    }
+    .sticky-cta .sticky-text {
+      background: transparent;
+      color: #22c55e;
+      border: 1px solid #22c55e;
+    }
+    .sticky-cta .sticky-quote {
+      background: #334155;
+      color: #f0f0f0;
+    }
+
     footer { text-align: center; padding: 2rem; color: #475569; font-size: 0.85rem; border-top: 1px solid #1e293b; }
     footer a { color: #475569; text-decoration: none; }
     footer a:hover { color: #22c55e; }
@@ -175,8 +280,23 @@
     <h1>Cut and Clear</h1>
     <p class="location">Titusville, NJ 08560 and surrounding areas</p>
     <p class="subtitle">Lawn care, landscaping, tree work, fencing, gutters, junk removal, and more.</p>
-    <a href="#contact" class="cta-btn">Get a Free Quote</a>
+    <div class="hero-ctas">
+      <a href="tel:+16099822182" class="cta-primary">📞 Call (609) 982-2182</a>
+      <a href="sms:+16099822182" class="cta-secondary">💬 Text for Fastest Quote</a>
+      <a href="#contact" class="cta-form">or fill out the quote form →</a>
+    </div>
   </section>
+
+  <!-- Trust Strip -->
+  <div class="trust-strip">
+    <span>🏡 Local to Mercer &amp; Bucks</span>
+    <span class="dot">•</span>
+    <span>⚡ Fast Quotes</span>
+    <span class="dot">•</span>
+    <span>🌿 Landscaping + 🗑️ Junk Removal</span>
+    <span class="dot">•</span>
+    <span>📞 Call or Text</span>
+  </div>
 
   <section><div class="container">
     <h2>What We Do</h2>
@@ -200,6 +320,17 @@
       <div class="why-item"><div class="icon">💰</div><h4>Fair Pricing</h4><p>No hidden fees. Hourly or flat-rate, you pick. Free estimates.</p></div>
       <div class="why-item"><div class="icon">🧹</div><h4>Clean Job Sites</h4><p>We don't leave a mess. Raked, blown, swept — ready for you.</p></div>
       <div class="why-item"><div class="icon">🏡</div><h4>Local Family Biz</h4><p>Titusville based. Serving Mercer, Bucks, and Hunterdon counties.</p></div>
+    </div>
+  </div></section>
+
+  <!-- Reviews Section Placeholder -->
+  <section><div class="container">
+    <h2>What Our Customers Say</h2>
+    <p class="lead">We're building our reputation one job at a time. Reviews coming soon.</p>
+    <div class="reviews-placeholder">
+      <p style="font-size:2rem;margin-bottom:0.5rem;">⭐</p>
+      <p>We're a newer local business and would love your feedback.</p>
+      <p style="margin-top:1rem;"><a href="https://g.page/r/CfzTvW7Cs4xEEBM/review" target="_blank">Leave a Google Review →</a></p>
     </div>
   </div></section>
 
@@ -291,6 +422,13 @@
   <footer>
     &copy; 2026 Cut and Clear &bull; Titusville, NJ 08560
   </footer>
+
+  <!-- Sticky Mobile CTA Bar -->
+  <div class="sticky-cta">
+    <a href="tel:+16099822182" class="sticky-call">📞 Call Now</a>
+    <a href="sms:+16099822182" class="sticky-text">💬 Text Us</a>
+    <a href="#contact" class="sticky-quote">📋 Get Quote</a>
+  </div>
 
   <script>
     const FORM_URL = 'https://script.google.com/macros/s/AKfycbxNYct1owsyzhQ_-fQnCIQq3qWTb59X3c3_0nUdsjUEqphvi_d4WQGL5S1shU3gAcPH/exec';
